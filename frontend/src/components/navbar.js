@@ -2,8 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import './stylesheets/navbar.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faShoppingCart, faHeart } from '@fortawesome/free-solid-svg-icons';
-import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import { faUser, faHeart, faShoppingBag } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import {jwtDecode} from 'jwt-decode';
 
@@ -93,7 +92,7 @@ function Navbar() {
             </li>
             <li className="nav-item">
               <Link className="nav-link" to="/cart" onClick={toggleCart} style={{ fontSize: '20px' }}>
-                <FontAwesomeIcon icon={faShoppingCart} /> Cart
+                <FontAwesomeIcon icon={faShoppingBag} /> Cart
               </Link>
             </li>
             <li className="nav-item">

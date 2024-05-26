@@ -56,13 +56,13 @@ function Home() {
 
   return (
     <div className="container-fluid">
-      <div className="bg-light text-center py-5" 
-           style={{ backgroundImage: `url(${images[currentIndex]})`, backgroundSize: 'cover', backgroundPosition: 'center', height: '610px', width: '100%', borderRadius: '5px', marginTop: '5px' }}>
+      <div className="bg-light text-center py-5 mx-auto" 
+           style={{ backgroundImage: `url(${images[currentIndex]})`, backgroundSize: 'cover', backgroundPosition: 'center', height: '450px', width: '80%', borderRadius: '5px', marginTop: '5px' }}>
       </div>
 
-      <div className="container-fluid mt-0 mb-4 p-1" style={{ backgroundColor: 'maroon', marginTop: '15px', borderRadius: '5px' }}>
+      <div className="container-fluid mb-4" style={{ backgroundColor: 'maroon', borderRadius: '5px', marginTop: '15px' }}>
         <h2 className="text-white text-center">Major Categories</h2>
-        <div className="row text-center text-white py-3 rounded" style={{ backgroundColor: 'maroon' }}>
+        <div className="row text-center text-white py-3 rounded">
           <div className="col">
             <Link to="Event-dresses" className="text-decoration-none text-white">
               <img src={main1Image} alt="Bridal Dresses" className="img-fluid rounded-circle mb-2" style={{ width: '100px', height: '100px', objectFit: 'cover' }} />
