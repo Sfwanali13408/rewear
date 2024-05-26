@@ -1,0 +1,19 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Vujahday&display=swap');
+.navbar.vujahday-script-regular {
+    font-family: "Vujahday Script", cursive;
+    font-weight: 400;
+    font-style: normal;
+  } */
+
+  .navbar input[type="text"]:focus {
+    outline: none;
+    box-shadow: none;
+  }
+
+  .navbar input[type="text"]{
+    width: 400px;
+    border: none;
+    font-size: large;
+    /* font-weight: 600; */
+  }
+  
