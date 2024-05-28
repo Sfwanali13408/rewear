@@ -8,12 +8,16 @@ import Navbar from './components/navbar';
 import Footer from './components/footer';
 import CategoryLists from './components/category_lists';
 import Error404 from './components/error404';
+import ProfilePage from './routes/profile';
+import ProductPage from './components/productpage';
 
 function App() {
   return (
     <Router>
       <Navbar />
       <Routes>
+        <Route path="/product/:productId"  component={ProductPage}/>
+        <Route path='/profile' element={<ProfilePage/>}/>
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
         {/* <Route path='/category' element={<CategoryLists />} /> */}

@@ -1,17 +1,17 @@
-// src/components/ProductCard.js
-import { useState} from 'react';
+import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart, faHeart } from '@fortawesome/free-solid-svg-icons';
 import { faHeart as faHeartRegular } from '@fortawesome/free-regular-svg-icons';
-import StarRating from './starcomponent';
+import StarRating from './starcomponent'; // Assuming you have a StarRating component
 
-const ProductCard = ({ product, handlebuy, handleAddToCart, handleAddToWishlist }) => {
+const ProductCard = ({ product, handleAddToCart, handleAddToWishlist }) => {
   const [isWishlisted, setIsWishlisted] = useState(false);
   
-  const handleWishlistClick = (product) => {
+  const handleWishlistClick = () => {
     handleAddToWishlist(product);
     setIsWishlisted(!isWishlisted);
   };
+
   return (
     <div className="col-sm-6 col-md-4 col-lg-3 mb-3">
       <div className="card h-100">
@@ -34,15 +34,13 @@ const ProductCard = ({ product, handlebuy, handleAddToCart, handleAddToWishlist 
               className="btn btn-outline-secondary btn-sm"
               onClick={() => handleAddToCart(product)}
             >
-              Add to Cart&nbsp;
-              <FontAwesomeIcon icon={faShoppingCart} />
+              Add to Cart <FontAwesomeIcon icon={faShoppingCart} />
             </button>
             <button
               className="btn btn-outline-danger btn-sm"
-              onClick={() => handleWishlistClick(product)}
+              onClick={handleWishlistClick}
             >
-              Add to Whishlist&nbsp;
-              <FontAwesomeIcon icon={isWishlisted ? faHeart : faHeartRegular} />
+              Add to Wishlist {isWishlisted ? <FontAwesomeIcon icon={faHeart} /> : <FontAwesomeIcon icon={faHeartRegular} />}
             </button>
           </div>
         </div>

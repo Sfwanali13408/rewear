@@ -4,6 +4,11 @@
     font-weight: 400;
     font-style: normal;
   } */
+/* Add this to your CSS file */
+.navbar .dropdown:hover .dropdown-menu {
+  display: block;
+  margin-top: 0; /* optional: adjust the position of the dropdown menu */
+}
 
   .navbar input[type="text"]:focus {
     outline: none;

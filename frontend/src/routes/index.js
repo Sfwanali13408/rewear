@@ -93,24 +93,28 @@ function Home() {
       <div className="container my-4">
         <h2 className="text-center mb-4">Featured Products</h2>
         <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
-          {currentProducts.map(product => (
-            <ProductCard 
-              key={product.id} 
-              product={product} 
-              handleBuy={handleBuy} 
-              handleAddToCart={handleAddToCart} 
-              handleAddToWishlist={handleAddToWishlist} 
-            />
+        {currentProducts.map(product => (  
+          <ProductCard 
+            product={product} 
+            handleBuy={handleBuy} 
+            handleAddToCart={handleAddToCart} 
+            handleAddToWishlist={handleAddToWishlist} 
+          />
           ))}
         </div>
         <nav aria-label="Page navigation example">
           <ul className="pagination justify-content-center mt-4">
             {Array.from({ length: totalPages }, (_, index) => (
               <li key={index} className={`page-item ${index + 1 === currentPage ? 'active' : ''}`}>
-                <button className="page-link rounded-2 mx-1" onClick={() => handlePageClick(index + 1)}>
-                  {index + 1}
-                </button>
-              </li>
+              <button
+                className={`page-link rounded-2 mx-1 ${index + 1 === currentPage ? 'bg-dark border-0' : 'bg-black border-0'} text-white`}
+                onClick={() => handlePageClick(index + 1)}
+              >
+                {index + 1}
+              </button>
+            </li>
+            
+            
             ))}
           </ul>
         </nav>

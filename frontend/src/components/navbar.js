@@ -1,16 +1,15 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import './stylesheets/navbar.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faHeart, faShoppingBag } from '@fortawesome/free-solid-svg-icons';
+import { faUser, faHeart, faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 
 function Navbar() {
   const [showCart, setShowCart] = useState(false);
-  const [showDropdown, setShowDropdown] = useState(false);
+  // const [showDropdown, setShowDropdown] = useState(false);
   const [userName, setUserName] = useState('');
   const navigate = useNavigate();
-  const dropdownRef = useRef(null);
 
   
   useEffect(() => {
@@ -20,6 +19,8 @@ function Navbar() {
       const decodedToken = decodeToken(token);
       if (decodedToken) {
         setUserName(decodedToken.user.name);
+        localStorage.setItem("name", decodedToken.user.name);
+        localStorage.setItem("email", decodedToken.user.email);
       }
     }
   }, []);
@@ -81,10 +82,6 @@ function Navbar() {
     setShowCart(!showCart);
   };
 
-  const toggleDropdown = (event) => {
-    event.preventDefault();
-    setShowDropdown(!showDropdown);
-  };
 
   const isLoggedIn = !!localStorage.getItem('token');
 
@@ -94,20 +91,17 @@ function Navbar() {
         <Link className="navbar-brand" to="/">
           <h2 className='logo' style={{ fontFamily: 'Vujahday Script, cursive', fontSize: '40px', fontWeight: 'bold' }}>Re Wear</h2>
         </Link>
-        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span className="navbar-toggler-icon"></span>
-        </button>
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ms-auto">
             <li className="nav-item">
               <Link className="nav-link" to="/" style={{ fontSize: '20px' }}>Home</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/shop" style={{ fontSize: '20px' }}>Shop</Link>
+              <Link className="nav-link" to="/shop" style={{ fontSize: '20px' }}>Sell</Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link" to="/cart" onClick={toggleCart} style={{ fontSize: '20px' }}>
-                <FontAwesomeIcon icon={faShoppingBag} /> Cart
+                <FontAwesomeIcon icon={faCartShopping} />
               </Link>
             </li>
             <li className="nav-item">
@@ -116,14 +110,14 @@ function Navbar() {
               </Link>
             </li>
           </ul>
-          <ul className="navbar-nav">
+          <ul className="navbar-nav" style={{ fontSize: '20px' }}>
             {isLoggedIn ? (
-              <li className="nav-item dropdown" ref={dropdownRef}>
-                <a className="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" aria-expanded="false" onClick={toggleDropdown}>
+              <li className="nav-item dropdown">
+                <a className="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" aria-expanded="false">
                   <FontAwesomeIcon icon={faUser} />
                   <span className="ms-2">{userName}</span>
                 </a>
-                <ul className={`dropdown-menu ${showDropdown ? 'show' : ''}`} aria-labelledby="navbarDropdown" style={{ right: 0 }}>
+                <ul className="dropdown-menu" aria-labelledby="navbarDropdown" style={{ right: 0 }}>
                   <li><Link className="dropdown-item" to="/profile">Profile</Link></li>
                   <li><Link className="dropdown-item" to="/orders">Orders</Link></li>
                   <li><hr className="dropdown-divider" /></li>
@@ -132,7 +126,7 @@ function Navbar() {
               </li>
             ) : (
               <li className="nav-item">
-                <Link className="nav-link" to="/login" style={{ fontSize: '20px' }}>Login</Link>
+                <Link className="nav-link" to="/login">Login</Link>
               </li>
             )}
           </ul>
