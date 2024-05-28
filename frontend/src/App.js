@@ -7,6 +7,7 @@ import Home from './routes/index';
 import Navbar from './components/navbar';
 import Footer from './components/footer';
 import CategoryLists from './components/category_lists';
+import Error404 from './components/error404';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <CategoryLists />
           <Home />
         </>} />
+        <Route path='*' element={<Error404 />} />
       </Routes>
       <Footer />
     </Router>

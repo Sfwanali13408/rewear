@@ -4,7 +4,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faHeart, faShoppingBag } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
-import {jwtDecode} from 'jwt-decode';
 
 function Navbar() {
   const [showCart, setShowCart] = useState(false);
@@ -13,18 +12,34 @@ function Navbar() {
   const navigate = useNavigate();
   const dropdownRef = useRef(null);
 
+  
   useEffect(() => {
-    const tokenname = localStorage.getItem('token');
-    if (tokenname) {
-      const decodedPayload = jwtDecode(tokenname, { header: false });
-      console.log('Decoded Payload:', decodedPayload);
-      const { name, email } = decodedPayload;
-      localStorage.setItem('name',name);
-      setUserName(name);
-      localStorage.setItem('email',email);
-      console.log(name, email);
+    // Decode the JWT token to get user information
+    const token = localStorage.getItem('token');
+    if (token) {
+      const decodedToken = decodeToken(token);
+      if (decodedToken) {
+        setUserName(decodedToken.user.name);
+      }
     }
   }, []);
+
+  const decodeToken = (token) => {
+    try {
+      const base64Url = token.split('.')[1];
+      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+      const jsonPayload = decodeURIComponent(
+        atob(base64)
+          .split('')
+          .map((c) => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
+          .join('')
+      );
+      return JSON.parse(jsonPayload);
+    } catch (error) {
+      console.error('Error decoding token:', error);
+      return null;
+    }
+  };
 
   const handleLogout = async () => {
     try {
