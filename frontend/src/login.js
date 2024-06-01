@@ -45,8 +45,13 @@ function Login() {
   };
 
   return (
+<<<<<<< HEAD
     <div className="container-fluid vh-100 d-flex align-items-center justify-content-center" style={{ backgroundColor: 'aliceblue' }}>
       <ToastContainer
+=======
+    <div className="container-fluid vh-00 d-flex align-items-center justify-content-center" style={{ backgroundColor: 'aliceblue' }}>
+      <ToastContainer 
+>>>>>>> a81445aebe1174fc28c1afbe8084dc424af045aa
         position='top-right'
         autoClose={2000}
         hideProgressBar={false}

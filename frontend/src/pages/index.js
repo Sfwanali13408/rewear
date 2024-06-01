@@ -56,13 +56,18 @@ function Home() {
 
   return (
     <div className="container-fluid">
+<<<<<<< HEAD:frontend/src/pages/index.js
       <div className="bg-light text-center py-5"
         style={{ backgroundImage: `url(${images[currentIndex]})`, backgroundSize: 'cover', backgroundPosition: 'center', height: '610px', width: '100%', borderRadius: '5px', marginTop: '5px' }}>
+=======
+      <div className="bg-light text-center py-5 mx-auto" 
+           style={{ backgroundImage: `url(${images[currentIndex]})`, backgroundSize: 'cover', backgroundPosition: 'center', height: '450px', width: '80%', borderRadius: '5px', marginTop: '5px' }}>
+>>>>>>> a81445aebe1174fc28c1afbe8084dc424af045aa:frontend/src/routes/index.js
       </div>
 
-      <div className="container-fluid mt-0 mb-4 p-1" style={{ backgroundColor: 'maroon', marginTop: '15px', borderRadius: '5px' }}>
+      <div className="container-fluid mb-4" style={{ backgroundColor: 'maroon', borderRadius: '5px', marginTop: '15px' }}>
         <h2 className="text-white text-center">Major Categories</h2>
-        <div className="row text-center text-white py-3 rounded" style={{ backgroundColor: 'maroon' }}>
+        <div className="row text-center text-white py-3 rounded">
           <div className="col">
             <Link to="Event-dresses" className="text-decoration-none text-white">
               <img src={main1Image} alt="Bridal Dresses" className="img-fluid rounded-circle mb-2" style={{ width: '100px', height: '100px', objectFit: 'cover' }} />
@@ -93,6 +98,7 @@ function Home() {
       <div className="container my-4">
         <h2 className="text-center mb-4">Featured Products</h2>
         <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+<<<<<<< HEAD:frontend/src/pages/index.js
           {currentProducts.map(product => (
             <ProductCard
               key={product.id}
@@ -101,16 +107,30 @@ function Home() {
               handleAddToCart={handleAddToCart}
               handleAddToWishlist={handleAddToWishlist}
             />
+=======
+        {currentProducts.map(product => (  
+          <ProductCard 
+            product={product} 
+            handleBuy={handleBuy} 
+            handleAddToCart={handleAddToCart} 
+            handleAddToWishlist={handleAddToWishlist} 
+          />
+>>>>>>> a81445aebe1174fc28c1afbe8084dc424af045aa:frontend/src/routes/index.js
           ))}
         </div>
         <nav aria-label="Page navigation example">
           <ul className="pagination justify-content-center mt-4">
             {Array.from({ length: totalPages }, (_, index) => (
               <li key={index} className={`page-item ${index + 1 === currentPage ? 'active' : ''}`}>
-                <button className="page-link rounded-2 mx-1" onClick={() => handlePageClick(index + 1)}>
-                  {index + 1}
-                </button>
-              </li>
+              <button
+                className={`page-link rounded-2 mx-1 ${index + 1 === currentPage ? 'bg-dark border-0' : 'bg-black border-0'} text-white`}
+                onClick={() => handlePageClick(index + 1)}
+              >
+                {index + 1}
+              </button>
+            </li>
+            
+            
             ))}
           </ul>
         </nav>
