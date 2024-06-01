@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './stylesheet/index.css';
+
 import img1 from '../assests/1.png';
 import img2 from '../assests/2.png';
 import img3 from '../assests/3.png';
@@ -56,8 +56,13 @@ function Home() {
 
   return (
     <div className="container-fluid">
+<<<<<<< HEAD:frontend/src/pages/index.js
+      <div className="bg-light text-center py-5"
+        style={{ backgroundImage: `url(${images[currentIndex]})`, backgroundSize: 'cover', backgroundPosition: 'center', height: '610px', width: '100%', borderRadius: '5px', marginTop: '5px' }}>
+=======
       <div className="bg-light text-center py-5 mx-auto" 
            style={{ backgroundImage: `url(${images[currentIndex]})`, backgroundSize: 'cover', backgroundPosition: 'center', height: '450px', width: '80%', borderRadius: '5px', marginTop: '5px' }}>
+>>>>>>> a81445aebe1174fc28c1afbe8084dc424af045aa:frontend/src/routes/index.js
       </div>
 
       <div className="container-fluid mb-4" style={{ backgroundColor: 'maroon', borderRadius: '5px', marginTop: '15px' }}>
@@ -93,6 +98,16 @@ function Home() {
       <div className="container my-4">
         <h2 className="text-center mb-4">Featured Products</h2>
         <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+<<<<<<< HEAD:frontend/src/pages/index.js
+          {currentProducts.map(product => (
+            <ProductCard
+              key={product.id}
+              product={product}
+              handleBuy={handleBuy}
+              handleAddToCart={handleAddToCart}
+              handleAddToWishlist={handleAddToWishlist}
+            />
+=======
         {currentProducts.map(product => (  
           <ProductCard 
             key={product.id}
@@ -101,6 +116,7 @@ function Home() {
             handleAddToCart={handleAddToCart} 
             handleAddToWishlist={handleAddToWishlist} 
           />
+>>>>>>> a81445aebe1174fc28c1afbe8084dc424af045aa:frontend/src/routes/index.js
           ))}
         </div>
         <nav aria-label="Page navigation example">

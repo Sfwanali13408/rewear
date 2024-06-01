@@ -1,9 +1,18 @@
+<<<<<<< HEAD:frontend/src/components/layout/navbar.js
+import React, { useState, useRef, useEffect } from 'react';
+import './navbar.css';
+=======
 import React, { useState, useEffect } from 'react';
 import './stylesheets/navbar.css';
+>>>>>>> a81445aebe1174fc28c1afbe8084dc424af045aa:frontend/src/components/navbar.js
 import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faHeart, faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
+<<<<<<< HEAD:frontend/src/components/layout/navbar.js
+import { jwtDecode } from 'jwt-decode';
+=======
+>>>>>>> a81445aebe1174fc28c1afbe8084dc424af045aa:frontend/src/components/navbar.js
 
 const Navbar = () => {
   const [showCart, setShowCart] = useState(false);
@@ -12,10 +21,34 @@ const Navbar = () => {
 
   
   useEffect(() => {
+<<<<<<< HEAD:frontend/src/components/navbar.js
     const storedUser = localStorage.getItem('user');
     console.log('Stored user:', storedUser);
     if (storedUser) {
       setUser(JSON.parse(storedUser));
+=======
+<<<<<<< HEAD:frontend/src/components/layout/navbar.js
+    const tokenname = localStorage.getItem('token');
+    if (tokenname) {
+      const decodedPayload = jwtDecode(tokenname, { header: false });
+      console.log('Decoded Payload:', decodedPayload);
+      const { name, email } = decodedPayload;
+      localStorage.setItem('name', name);
+      setUserName(name);
+      localStorage.setItem('email', email);
+      console.log(name, email);
+=======
+    // Decode the JWT token to get user information
+    const token = localStorage.getItem('token');
+    if (token) {
+      const decodedToken = decodeToken(token);
+      if (decodedToken) {
+        setUserName(decodedToken.user.name);
+        localStorage.setItem("name", decodedToken.user.name);
+        localStorage.setItem("email", decodedToken.user.email);
+      }
+>>>>>>> a81445aebe1174fc28c1afbe8084dc424af045aa:frontend/src/components/navbar.js
+>>>>>>> 261b2fc55e09be05310792f6a98be3098a811814:frontend/src/components/layout/navbar.js
     }
   }, []);
 

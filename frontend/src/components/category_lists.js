@@ -1,6 +1,11 @@
+<<<<<<< HEAD
+import React from 'react';
+// import './stylesheets/navbar.css';
+=======
 import React, { useState } from 'react';
 import './stylesheets/navbar.css';
 
+>>>>>>> a81445aebe1174fc28c1afbe8084dc424af045aa
 function Categorylists() {
   const [allCategoriesExpanded, setAllCategoriesExpanded] = useState(false);
   const [menExpanded, setMenExpanded] = useState(false);
@@ -30,6 +35,48 @@ function Categorylists() {
 
   return (
     <div>
+<<<<<<< HEAD
+      <div className="navbar bg-dark ">
+        <ul className="nav">
+          <li className="nav-item dropdown">
+            <a className="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style={{ color: 'white' }}>
+              Men's Clothing
+            </a>
+            <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a className="dropdown-item" href="/" style={{ color: 'black' }}>Event Dresses</a></li>
+              <li><a className="dropdown-item" href="/" style={{ color: 'black' }}>Summer Collection</a></li>
+              <li><a className="dropdown-item" href="/" style={{ color: 'black' }}>Winter Collection</a></li>
+              <li><a className="dropdown-item" href="/" style={{ color: 'black' }}>Shoes Collection</a></li>
+            </ul>
+          </li>
+          <li className="nav-item dropdown">
+            <a className="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style={{ color: 'white' }}>
+              Women's Clothing
+            </a>
+            <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a className="dropdown-item" href="/" style={{ color: 'black' }}>Event Dresses</a></li>
+              <li><a className="dropdown-item" href="/" style={{ color: 'black' }}>Summer Collection</a></li>
+              <li><a className="dropdown-item" href="/" style={{ color: 'black' }}>Winter Collection</a></li>
+              <li><a className="dropdown-item" href="/" style={{ color: 'black' }}>Shoes Collection</a></li>
+            </ul>
+          </li>
+          <li className="nav-item dropdown">
+            <a className="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style={{ color: 'white' }}>
+              Children's Clothing
+            </a>
+            <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a className="dropdown-item" href="/" style={{ color: 'black' }}>Event Dresses</a></li>
+              <li><a className="dropdown-item" href="/" style={{ color: 'black' }}>Summer Collection</a></li>
+              <li><a className="dropdown-item" href="/" style={{ color: 'black' }}>Winter Collection</a></li>
+              <li><a className="dropdown-item" href="/" style={{ color: 'black' }}>Shoes Collection</a></li>
+            </ul>
+          </li>
+          <li className="nav-item">
+            <input type='text' className="form-control me-2" placeholder='Search Product' style={{ color: 'black' }} />
+          </li>
+        </ul>
+      </div>
+=======
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <button 
           className="navbar-toggler d-lg-none" 
@@ -118,6 +165,7 @@ function Categorylists() {
           </ul>
         </div>
       </nav>
+>>>>>>> a81445aebe1174fc28c1afbe8084dc424af045aa
     </div>
   );
 }
