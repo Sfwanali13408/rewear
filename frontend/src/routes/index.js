@@ -95,6 +95,7 @@ function Home() {
         <div className="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
         {currentProducts.map(product => (  
           <ProductCard 
+            key={product.id}
             product={product} 
             handleBuy={handleBuy} 
             handleAddToCart={handleAddToCart} 
@@ -107,12 +108,12 @@ function Home() {
             {Array.from({ length: totalPages }, (_, index) => (
               <li key={index} className={`page-item ${index + 1 === currentPage ? 'active' : ''}`}>
               <button
-                className={`page-link rounded-2 mx-1 ${index + 1 === currentPage ? 'bg-dark border-0' : 'bg-black border-0'} text-white`}
+                className={`page-link rounded-2 mx-1 ${index + 1 === currentPage ? 'bg-dark border-0 text-white' : 'bg-light border-1'} text-black`}
                 onClick={() => handlePageClick(index + 1)}
               >
                 {index + 1}
               </button>
-            </li>
+              </li>
             
             
             ))}

@@ -5,48 +5,28 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faHeart, faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 
-function Navbar() {
+const Navbar = () => {
   const [showCart, setShowCart] = useState(false);
-  // const [showDropdown, setShowDropdown] = useState(false);
-  const [userName, setUserName] = useState('');
+  const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
   
   useEffect(() => {
-    // Decode the JWT token to get user information
-    const token = localStorage.getItem('token');
-    if (token) {
-      const decodedToken = decodeToken(token);
-      if (decodedToken) {
-        setUserName(decodedToken.user.name);
-        localStorage.setItem("name", decodedToken.user.name);
-        localStorage.setItem("email", decodedToken.user.email);
-      }
+    const storedUser = localStorage.getItem('user');
+    console.log('Stored user:', storedUser);
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
     }
   }, []);
-
-  const decodeToken = (token) => {
-    try {
-      const base64Url = token.split('.')[1];
-      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-      const jsonPayload = decodeURIComponent(
-        atob(base64)
-          .split('')
-          .map((c) => '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2))
-          .join('')
-      );
-      return JSON.parse(jsonPayload);
-    } catch (error) {
-      console.error('Error decoding token:', error);
-      return null;
-    }
-  };
 
   const handleLogout = async () => {
     try {
       const token = localStorage.getItem('token');
       if (!token) {
-        throw new Error('No token found');
+        localStorage.removeItem('user');
+        localStorage.removeItem('token');
+        navigate('/login');
+        return;
       }
 
       await axios.post(
@@ -60,9 +40,8 @@ function Navbar() {
       );
 
       // Clear localStorage and update state
+      localStorage.removeItem('user');
       localStorage.removeItem('token');
-      localStorage.removeItem('email');
-      localStorage.removeItem('name');
 
       console.log('User Logged out Successfully');
       navigate('/login');
@@ -112,11 +91,14 @@ function Navbar() {
           </ul>
           <ul className="navbar-nav" style={{ fontSize: '20px' }}>
             {isLoggedIn ? (
+              
               <li className="nav-item dropdown">
-                <a className="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" aria-expanded="false">
+                <span className="nav-link dropdown-toggle" id="navbarDropdown" role="button" aria-expanded="false">
                   <FontAwesomeIcon icon={faUser} />
-                  <span className="ms-2">{userName}</span>
-                </a>
+                  {user && (
+                  <span className="ms-2 user-select-none">{user.profile.name}</span>
+                  )}
+                </span>
                 <ul className="dropdown-menu" aria-labelledby="navbarDropdown" style={{ right: 0 }}>
                   <li><Link className="dropdown-item" to="/profile">Profile</Link></li>
                   <li><Link className="dropdown-item" to="/orders">Orders</Link></li>

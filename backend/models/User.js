@@ -1,20 +1,31 @@
 const mongoose = require('mongoose');
+const moment = require('moment-timezone');
 
 const userSchema = new mongoose.Schema({
-  email: {
-    type: String,
-    required: true,
-    unique: true,
+  email: { 
+    type: String, required: true, unique: true },
+  password: { 
+    type: String, required: true },
+  role: { 
+    type: String, 
+    enum: ['buyer', 'seller', 'tailor'], 
+    default: 'buyer' 
   },
-  password: {
-    type: String,
-    required: true,
+  profile: {
+    name: String,
+    address: String,
+    phone: String
   },
-  name: {
-    type: String,
-    required: true,
+  status: { 
+    type: String, default: 'active' },
+  created_at: { 
+    type: Date, default: () => moment().tz('Asia/Karachi').toDate() 
   },
+  updated_at: { 
+    type: Date, default: () => moment().tz('Asia/Karachi').toDate() 
+  }
 });
+
 
 const User = mongoose.model('User', userSchema);
 

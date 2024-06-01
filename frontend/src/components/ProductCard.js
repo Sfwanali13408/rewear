@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart, faHeart } from '@fortawesome/free-solid-svg-icons';
 import { faHeart as faHeartRegular } from '@fortawesome/free-regular-svg-icons';
-import StarRating from './starcomponent'; // Assuming you have a StarRating component
+import StarRating from './starcomponent';
 
 const ProductCard = ({ product, handleAddToCart, handleAddToWishlist }) => {
   const [isWishlisted, setIsWishlisted] = useState(false);

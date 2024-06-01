@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGoogle } from '@fortawesome/free-brands-svg-icons';
 import logo from '../assests/login.png'; // Import your image
@@ -21,31 +21,38 @@ function Register() {
   const handleRegister = async (e) => {
     e.preventDefault();
 
-    // Check if passwords match
+    if (!name || !email || !password ) {
+      toast.error('Please fill in all fields');
+      return;
+    }
+
     if (password !== confirmPassword) {
-      setErrorMessage('Passwords do not match');
-      toast.error('Password do not match');
+      toast.error('Passwords do not match');
       return;
     }
 
     try {
+      const response = await axios.post('http://localhost:3001/api/register', {
+        name,
+        email,
+        password
+      });
 
-      await axios.post('http://localhost:3001/api/register', { name, email, password });
-      console.log('User Registered Successfully');
-      toast.success('User Registered Successfully');
-      navigate('/login');
-      
-    } catch (error) {
-      let errorMsg = 'An unexpected error occurred.';
-      if (error.response) {
-        // Backend errors
-        errorMsg = error.response.data.message;
-      } else if (error.request) {
-        // Network errors
-        errorMsg = 'Network error. Please try again later.';
+      if (response.status === 201) {
+        navigate('/login');
+      } else {
+        toast.error(response.data.msg, { key: 'errorToast' });
       }
-      setErrorMessage(errorMsg);
-      toast.error(errorMsg);
+    } catch (error) {
+      console.error('Error registering user:', error.message);
+      if (error.response) {
+        toast.error(error.response.data.msg || 'Error registering user. Please try again.');
+      } else if (error.request) {
+        console.log('Request:', error.request);
+      } else {
+        console.log('Error message:', error.message);
+      }
+      setErrorMessage(error.response.data.msg);
     }
   };
 
@@ -54,7 +61,7 @@ function Register() {
   };
 
   return (
-    <div className="container-fluid vh-100 d-flex align-items-center justify-content-center bg-light">
+    <div className="container-fluid vh-95 d-flex align-items-center justify-content-center bg-light">
       <ToastContainer 
       position='top-right'
       autoClose= {2000}
@@ -63,8 +70,8 @@ function Register() {
       closeOnClick
       rtl = {false}
       theme='dark'
-      transition= {Bounce}/>
-      <ToastContainer />
+      transition= {Bounce}
+      limit={4}/>
       <div className="row " style={{ width: '100%', marginLeft: '15%' }}>
         <div className="col-md-6 d-none d-md-block" style={{ backgroundImage: `url(${logo})`, backgroundSize: 'cover', backgroundPosition: 'center', height:'650px'}}>
         </div>
@@ -130,13 +137,14 @@ function Register() {
                 <div className="mb-3 text-center">
                   <p>Already Registered? <Link to='/login'>Login</Link></p>
                 </div>
-                <div className="text-center">
+                
+              </form>
+              <div className="text-center">
                   <button className="btn btn-primary" style={{ backgroundColor: '#db2525', border: 'none' }}>
                     <FontAwesomeIcon icon={faGoogle} className="mr-2" style={{ color: 'white' }} /> {/* Display G icon */}
                     Register with Google
                   </button>
                 </div>
-              </form>
             </div>
           </div>
         </div>

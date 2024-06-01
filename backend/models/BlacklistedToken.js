@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const moment = require('moment-timezone');
 
 const blacklistedTokenSchema = new mongoose.Schema({
   token: {
@@ -6,7 +7,7 @@ const blacklistedTokenSchema = new mongoose.Schema({
     required: true,
   },
   expiresAt: {
-    type: Date,
+    type: Date, default: () => moment().tz('Asia/Karachi').toDate(),
     required: true,
   },
 });

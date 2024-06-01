@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGoogle } from '@fortawesome/free-brands-svg-icons';
+import { faEnvelope as solidFaEnvelope, faKey as solidFaKey } from '@fortawesome/free-solid-svg-icons';
 import logo from '../assests/login.png';
 import { Bounce, ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -19,12 +20,19 @@ function Login() {
     setErrorMessage('');
     e.preventDefault();
     try {
+      
       const response = await axios.post('http://localhost:3001/api/login', { email, password });
-      const token = response.data.token;  // Ensure you're accessing the correct property
+      
+      const { user, token } = response.data;
+
+      // Save token to local storage
       localStorage.setItem('token', token);
       
-      toast.success('Login Successful');
+      // Save user details to local storage
+      localStorage.setItem('user', JSON.stringify(user));
+
       navigate('/');
+
     } catch (error) {
       let errorMsg = 'An unexpected error occurred.';
       if (error.response) {
@@ -45,7 +53,7 @@ function Login() {
   };
 
   return (
-    <div className="container-fluid vh-100 d-flex align-items-center justify-content-center" style={{ backgroundColor: 'aliceblue' }}>
+    <div className="container-fluid vh-95 d-flex align-items-center justify-content-center" style={{ backgroundColor: 'aliceblue' }}>
       <ToastContainer 
         position='top-right'
         autoClose={2000}
@@ -55,6 +63,7 @@ function Login() {
         rtl={false}
         theme='dark'
         transition={Bounce}
+        limit={3}
       />
       <div className="row" style={{ width: '100%', marginLeft: '15%' }}>
         <div className="col-md-6 d-none d-md-block" style={{ backgroundImage: `url(${logo})`, backgroundSize: 'cover', backgroundPosition: 'center', height: '650px' }}>
@@ -64,19 +73,31 @@ function Login() {
             <div className="card-body p-5">
               <h1 className="text-center mb-4" style={{ color: 'maroon', fontFamily: 'Vujahday Script, cursive', fontWeight: 'bold' }}>Re Wear</h1>
               <form onSubmit={handleSubmit}>
-                <div className="mb-3">
-                  <input
-                    type='email'
-                    className="form-control"
-                    name='email'
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder='Enter your Email'
-                    required
-                  />
+              <div className="mb-3">
+                  <div className="input-group">
+                    
+                      <span className="input-group-text">
+                        <FontAwesomeIcon icon={solidFaEnvelope} />
+                      </span>
+                    
+                    <input
+                      type='email'
+                      className="form-control"
+                      name='email'
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder='Enter your Email'
+                      required
+                    />
+                  </div>
                 </div>
                 <div className="mb-3">
                   <div className="input-group">
+                    
+                      <span className="input-group-text">
+                        <FontAwesomeIcon icon={solidFaKey} />
+                      </span>
+                    
                     <input
                       type={showPassword ? 'text' : 'password'}
                       className="form-control"
@@ -92,21 +113,22 @@ function Login() {
                 </div>
                 {errorMessage && <div className="error-message" style={{ color: 'red' }}>{errorMessage}</div>}
                 <div className="mb-3 text-left">
-                  <a href='/' alt="forgot_password">Forgot Password?</a>
+                  <a href='/forgotpassword' alt="forgot_password">Forgot Password?</a>
                 </div>
                 <div className="mb-3 text-center">
-                  <button type='submit' className="btn btn-primary btn-block">Login</button>
+                  <button type='submit' className="btn btn-primary btn-block"style={{backgroundColor:"maroon",border:"none"}}>Login</button>
                 </div>
                 <div className="mb-3 text-center">
                   <p>Don't have an account? <Link to='/register'>Register</Link></p>
                 </div>
-                <div className="text-center">
+                
+              </form>
+              <div className="text-center">
                   <button className="btn btn-primary" style={{ backgroundColor: '#db2525', border: 'none' }}>
                     <FontAwesomeIcon icon={faGoogle} className="mr-2" style={{ color: 'white' }} /> {/* Display G icon */}
                     Sign in with Google
                   </button>
                 </div>
-              </form>
             </div>
           </div>
         </div>

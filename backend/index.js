@@ -7,9 +7,10 @@ require('./database'); // Import the database connection
 const app = express();
 
 app.use(cors({
-  origin: 'http://localhost:3000', // Allow requests from this origin
-  methods: '*', // Allow any HTTP methods
-  allowedHeaders: '*', // Allow any headers
+  origin: 'http://localhost:3000', // Adjust this to match the origin of your frontend app
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'], // Add Authorization header
+  credentials: true // Enable credentials (cookies, authorization headers, etc.)
 }));
 
 // Middleware to parse JSON bodies
