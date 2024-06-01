@@ -1,12 +1,13 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import './App.css';
-import Register from './routes/register';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Login from './routes/login';
-import Home from './routes/index';
-import Navbar from './components/navbar';
-import Footer from './components/footer';
+
+import Register from './pages/register';
+
+import Login from './pages/login';
+import Home from './pages/index';
+import Navbar from './components/layout/navbar';
+import Footer from './components/layout/footer';
 import CategoryLists from './components/category_lists';
+import Profile from './pages/Profile';
 
 function App() {
   return (
@@ -16,12 +17,14 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
         <Route path='/category' element={<CategoryLists />} />
+        <Route path='/profile' element={<Profile />} />
+
         <Route path='/' element={<>
           <CategoryLists />
           <Home />
         </>} />
       </Routes>
-      <Footer />
+
     </Router>
   );
 }

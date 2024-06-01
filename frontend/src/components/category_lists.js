@@ -1,12 +1,12 @@
 import React from 'react';
-import './stylesheets/navbar.css';
+// import './stylesheets/navbar.css';
 function Categorylists() {
   return (
     <div>
       <div className="navbar bg-dark ">
         <ul className="nav">
           <li className="nav-item dropdown">
-            <a className="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style={{ color: 'white'}}>
+            <a className="nav-link dropdown-toggle" href="/" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style={{ color: 'white' }}>
               Men's Clothing
             </a>
             <ul className="dropdown-menu" aria-labelledby="navbarDropdown">

@@ -20,9 +20,9 @@ function Login() {
     e.preventDefault();
     try {
       const response = await axios.post('http://localhost:3001/api/login', { email, password });
-      const token = response.data.token;  // Ensure you're accessing the correct property
+      const token = response.data.token;
       localStorage.setItem('token', token);
-      
+
       toast.success('Login Successful');
       navigate('/');
     } catch (error) {
@@ -46,7 +46,7 @@ function Login() {
 
   return (
     <div className="container-fluid vh-100 d-flex align-items-center justify-content-center" style={{ backgroundColor: 'aliceblue' }}>
-      <ToastContainer 
+      <ToastContainer
         position='top-right'
         autoClose={2000}
         hideProgressBar={false}
